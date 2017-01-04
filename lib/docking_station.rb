@@ -9,6 +9,7 @@ def initialize(status="Empty")
 	@status = status
 end
 
+
 #def checking
 #	if status == ""
 #		true
