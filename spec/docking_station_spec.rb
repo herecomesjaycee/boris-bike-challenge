@@ -8,7 +8,13 @@ describe DockingStation do
     expect(bike).to respond_to :working?
   end
 
-  it 'should take one argument' do
-    expect(subject).to respond_to(:dock_bike).with(1).argument
+  it {is_expected.to respond_to :docking}
+  it { is_expected.to respond_to(:docking).with(1).argument}
+  it 'should be able to dock bike'do
+    bike = Bike.new
+    # subject = DockingStation.new
+    # DockingStation.new.docking(var bike from line 14 in this spec file)
+    expect(subject.docking(bike)).to eq bike
   end
+
 end
