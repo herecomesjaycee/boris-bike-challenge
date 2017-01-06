@@ -12,7 +12,9 @@ class DockingStation
 	def release_bike
 	  raise 'No bikes available at this dock' if empty?
 	  raise 'No working bikes' if working_bikes?
-	  @bikes.pop
+	  released_bike = @bikes.select{ |bike| bike.working?}.pop
+	  @bikes.delete(released_bike) 
+	  released_bike
 	end
 
 	def docking(bike)

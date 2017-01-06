@@ -41,5 +41,11 @@ describe DockingStation do
       subject.report(bike)
       expect {subject.release_bike}.to raise_error('No working bikes')
     end
+    it "only return working bike" do
+      subject.docking(bike)
+      subject.docking double(:working_bike, working?: true)
+      subject.docking(bike)
+      expect(subject.release_bike).to be_working
+end   
   end
 end
