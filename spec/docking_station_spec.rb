@@ -1,5 +1,3 @@
-
-
 require 'docking_station'
 
 describe DockingStation do
@@ -27,8 +25,24 @@ describe DockingStation do
     end
   end
 
+  describe '#report' do
+    it {is_expected.to respond_to(:report).with(1).argument}
+    it "report broken bike" do
+     returned_bike = subject.docking(Bike.new)[0]
+     expect(subject.report(returned_bike)).not_to be_working
+   end
+   end
+
   describe '#release_bike' do
     it {is_expected.to respond_to :release_bike}
     it {expect{ subject.release_bike }.to raise_error('No bikes available at this dock')}
+    it "not release broken bike" do
+    bike = Bike.new
+    subject.docking(bike)
+    subject.report(bike)
+    expect {subject.release_bike}.to raise_error('No working bikes')
   end
+  end
+
+
 end
