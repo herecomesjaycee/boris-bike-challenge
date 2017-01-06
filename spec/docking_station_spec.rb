@@ -1,6 +1,8 @@
 require 'docking_station'
 
 describe DockingStation do
+  let(:good_bike) {double :good_bike, working?: true}
+  let(:bad_bike)  {double :bad_bike, working?: false}
   let(:bike) { double :bike, :working= => true, working?: false}
   describe '#docking'do
     it {is_expected.to respond_to :docking}
@@ -36,13 +38,18 @@ describe DockingStation do
   describe '#broken_bikes' do
     it {is_expected.to respond_to :broken_bikes}
     it 'return broken bikes' do
-      subject.docking(bike)
-      subject.docking(bike)
-      expect(subject.broken_bikes).to eq [bike , bike]
+      subject.docking(good_bike)
+      subject.docking(bad_bike)
+      subject.docking(good_bike)
+      subject.docking(bad_bike)
+      expect(subject.broken_bikes).to eq [bad_bike , bad_bike]
+    end
     it 'remove broken bikes' do
-    subject.docking(bike)
+    subject.docking(bad_bike)
+    subject.docking(good_bike)
+
     subject.broken_bikes
-    expect(subject.bikes).to eq []
+    expect(subject.bikes).to eq [good_bike]
     end
 
   end

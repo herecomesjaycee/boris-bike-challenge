@@ -3,7 +3,7 @@ require_relative 'bike'
 class DockingStation
 
 	attr_accessor :bikes
-	
+
 	DEFAULT_CAPACITY = 20
 	def initialize(capacity = DEFAULT_CAPACITY)
 		@bikes = []
@@ -29,7 +29,9 @@ class DockingStation
 	end
 
 	def broken_bikes
-		@bikes.select!{|bike| !bike.working?}
+		broke_bikes = @bikes.reject!{|bike| !bike.working?}
+		@bikes.delete(broke_bikes)
+		broke_bikes
 	end
 
 	private
