@@ -33,6 +33,10 @@ describe DockingStation do
     end
   end
 
+  describe '#broken_bikes' do
+    it {is_expected.to respond_to :broken_bikes}
+  end
+
   describe '#release_bike' do
     it {is_expected.to respond_to :release_bike}
     it {expect{ subject.release_bike }.to raise_error('No bikes available at this dock')}
@@ -46,6 +50,6 @@ describe DockingStation do
       subject.docking double(:working_bike, working?: true)
       subject.docking(bike)
       expect(subject.release_bike).to be_working
-end   
+    end
   end
 end
