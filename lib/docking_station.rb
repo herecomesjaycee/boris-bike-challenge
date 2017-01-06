@@ -21,7 +21,7 @@ class DockingStation
 	end
 
 	def report(bike)
-		bike.working = false
+		bike.working false
 		bike
 	end
 
