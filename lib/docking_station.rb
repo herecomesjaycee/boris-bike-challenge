@@ -24,12 +24,12 @@ class DockingStation
 	end
 
 	def report(bike)
-		bike.working false
+		bike.working = false
 		bike
 	end
 
 	def broken_bikes
-		@bikes.select{|bike| !bike.working?}
+		@bikes.select!{|bike| !bike.working?}
 	end
 
 	private

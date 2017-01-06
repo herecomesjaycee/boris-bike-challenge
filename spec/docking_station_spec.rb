@@ -1,7 +1,7 @@
 require 'docking_station'
 
 describe DockingStation do
-  let(:bike) { double :bike, working: true, working?: false}
+  let(:bike) { double :bike, :working= => true, working?: false}
   describe '#docking'do
     it {is_expected.to respond_to :docking}
     it {is_expected.to respond_to(:docking).with(1).argument}
@@ -35,6 +35,16 @@ describe DockingStation do
 
   describe '#broken_bikes' do
     it {is_expected.to respond_to :broken_bikes}
+    it 'return broken bikes' do
+      subject.docking(bike)
+      subject.docking(bike)
+      expect(subject.broken_bikes).to eq [bike , bike]
+    it 'remove broken bikes' do
+    subject.docking(bike)
+    subject.broken_bikes
+    expect(subject.bikes).to eq []
+    end
+
   end
 
   describe '#release_bike' do
